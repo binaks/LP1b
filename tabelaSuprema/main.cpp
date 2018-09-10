@@ -51,18 +51,18 @@ void printHeader( const std::vector< std::string > & fields_) {
 }
 
 void printTable( const std::vector< std::string > & header_, const std::vector< std::string > & ints_) {
-    cout << "| ";
 
     for (auto i(0u); i < ints_.size(); ++i) {
-        cout << setw(header_[1].size()) << setfill (' ') << ints_[i];
-        cout << " |" << endl;
+        cout << "| ";
+        cout << setw(header_[0].size()) << setfill (' ') << ints_[i];
+        cout << " ";
         
-        if (i != (ints_.size() - 1)) {
-            cout << "| ";
+        if (i % header_.size() == 0 && i != 0 ) {
+            cout << "|";
         }
-
-        cout << endl;
     }
+
+    cout << endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
 
     ifs_.open(argv[2]);
 
-    while ( getline (ifs_, line) ) {
+    while ( getline (ifs_, line, ' ') ) {
         ints.push_back(line);
     }
     
