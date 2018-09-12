@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -51,18 +52,21 @@ void printHeader( const std::vector< std::string > & fields_) {
 }
 
 void printTable( const std::vector< std::string > & header_, const std::vector< std::string > & ints_) {
+    std::ostringstream oss_;
 
     for (auto i(0u); i < ints_.size(); ++i) {
-        cout << "| ";
-        cout << setw(header_[0].size()) << setfill (' ') << ints_[i];
-        cout << " ";
+        oss_ << "| ";
+        oss_ << setw(header_[i].size()) << setfill (' ') << ints_[i];
+        oss_ << " ";
         
         if (i % header_.size() == 0 && i != 0 ) {
-            cout << "|";
+            oss_ << "|";
+            oss_ << '\n';
         }
     }
 
-    cout << endl;
+    oss_ << endl;
+    cout << oss_.str();
 }
 
 int main(int argc, char *argv[]) {
